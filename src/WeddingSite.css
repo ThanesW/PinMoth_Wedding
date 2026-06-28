@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Charmonman:wght@400;600&family=Cormorant+Garamond:wght@400;600&family=Sarabun:wght@400;600&display=swap');
+
+.wedding-page {
+  max-width: 480px;
+  margin: 0 auto;
+  background: #faf2f2;
+  font-family: 'Sarabun', sans-serif;
+  color: #5e4242;
+}
+
+.wedding-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #7d5a5a;
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+.wedding-eyebrow--center {
+  text-align: center;
+}
+
+.wedding-hero {
+  background: #f1d1d1;
+  padding: 56px 24px 40px;
+  text-align: center;
+}
+
+.wedding-names {
+  font-family: 'Charmonman', cursive;
+  font-weight: 600;
+  font-size: 40px;
+  color: #7d5a5a;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.wedding-divider {
+  width: 36px;
+  height: 1px;
+  background: #7d5a5a;
+  opacity: 0.5;
+  margin: 14px auto 16px;
+}
+
+.wedding-divider--small {
+  width: 24px;
+  margin: 0 auto 12px;
+}
+
+.wedding-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: #7d5a5a;
+  margin: 0 0 22px;
+}
+
+.wedding-countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.wedding-countdown-box {
+  background: #fff;
+  border: 0.5px solid rgba(125, 90, 90, 0.35);
+  border-radius: 4px;
+  padding: 10px 14px;
+  min-width: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wedding-countdown-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #7d5a5a;
+}
+
+.wedding-countdown-label {
+  font-size: 11px;
+  color: #7d5a5a;
+  margin-top: 2px;
+}
+
+.wedding-intro {
+  padding: 28px 24px 8px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.wedding-section {
+  padding: 22px 24px;
+}
+
+.wedding-card {
+  background: #fff;
+  border: 0.5px solid #f1d1d1;
+  border-radius: 6px;
+  padding: 24px 20px;
+}
+
+.wedding-card--center {
+  text-align: center;
+}
+
+.wedding-venue-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  color: #5e4242;
+  margin: 0 0 4px;
+}
+
+.wedding-venue-sub {
+  font-size: 13px;
+  color: #7d5a5a;
+  margin: 0 0 16px;
+}
+
+.wedding-map-placeholder {
+  background: #f3e1e1;
+  border-radius: 4px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 16px;
+}
+
+.wedding-venue-time {
+  font-size: 13px;
+  color: #5e4242;
+  margin: 0 0 18px;
+}
+
+.wedding-rsvp-question {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: #5e4242;
+  margin: 0 0 4px;
+}
+
+.wedding-rsvp-sub {
+  font-size: 12px;
+  color: #7d5a5a;
+  margin: 0 0 20px;
+}
+
+.wedding-rsvp-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.wedding-rsvp-message {
+  font-size: 13px;
+  color: #7d5a5a;
+  margin: 0;
+}
+
+.wedding-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #7d5a5a;
+  color: #7d5a5a;
+  background: #fff;
+  border-radius: 3px;
+  padding: 10px 22px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  font-family: 'Sarabun', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+
+.wedding-btn:active {
+  transform: scale(0.97);
+}
+
+.wedding-btn:focus-visible {
+  outline: 2px solid #7d5a5a;
+  outline-offset: 2px;
+}
+
+.wedding-btn--fill {
+  background: #7d5a5a;
+  color: #fff;
+}
+
+.wedding-footer {
+  padding: 24px 24px 40px;
+  text-align: center;
+  border-top: 0.5px solid #f1d1d1;
+}
+
+.wedding-footer-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: #7d5a5a;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wedding-btn {
+    transition: none;
+  }
+}

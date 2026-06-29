@@ -8,6 +8,25 @@ const WEDDING_DATE = new Date('2026-12-19T18:00:00+07:00')
 const MAP_URL =
   'https://www.google.co.th/maps/place/The+Athenee+Hotel,+a+Luxury+Collection+Hotel,+Bangkok/@13.7413541,100.5452001,17z/data=!4m9!3m8!1s0x30e2974d07377631:0xfd90058d241e8d30!5m2!4m1!1i2!8m2!3d13.7413541!4d100.547775!16s%2Fg%2F1v_v_ttb'
 
+// ตัวอย่างกำหนดการ — แก้เวลา/หัวข้อ/คำอธิบายให้ตรงกับงานจริง เพิ่ม/ลบรายการได้เลย
+const TIMELINE = [
+  { time: '16:00', title: 'พิธีหมั้น', desc: 'พิธีสงฆ์และพิธีหมั้นแบบไทย' },
+  { time: '17:00', title: 'ถ่ายภาพ', desc: 'ถ่ายภาพร่วมกับครอบครัวและเพื่อนๆ' },
+  { time: '18:00', title: 'งานเลี้ยงฉลองมงคลสมรส', desc: 'อาหารค่ำและการแสดงความยินดี' },
+  { time: '20:30', title: 'อวยพรคู่บ่าวสาว', desc: 'ช่วงเวลาพิเศษส่งท้ายงาน' },
+]
+
+// เพิ่มรูปจริงตรงนี้ทีหลังได้เลย เช่น { src: '/photos/pre-wed-01.jpg', alt: 'ปิ่นกับแมมมอธที่...' }
+// ถ้า array นี้ว่าง หน้าเว็บจะโชว์ข้อความ "ภาพจะอัปเดตเร็วๆ นี้" แทนโดยอัตโนมัติ
+const GALLERY_IMAGES = []
+
+// ตัวอย่างรายชื่อแขก — แทนที่ทั้งหมดด้วยรายชื่อจริงก่อนแชร์ลิงก์ให้แขก (ชื่อด้านล่างเป็นชื่อสมมติ)
+const GUEST_TABLES = [
+  { name: 'สมชาย ใจดี', table: 'A1' },
+  { name: 'วิภาวรรณ สุขใจ', table: 'A2' },
+  { name: 'ธนกร รักเรียน', table: 'B3' },
+]
+
 function getTimeLeft() {
   const diff = Math.max(0, WEDDING_DATE.getTime() - Date.now())
   return {
@@ -21,6 +40,7 @@ function getTimeLeft() {
 export default function WeddingSite() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft)
   const [rsvpStatus, setRsvpStatus] = useState(null)
+  const [tableQuery, setTableQuery] = useState('')
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
@@ -33,6 +53,11 @@ export default function WeddingSite() {
     { label: 'นาที', value: timeLeft.minutes },
     { label: 'วิ', value: timeLeft.seconds },
   ]
+
+  const trimmedQuery = tableQuery.trim()
+  const tableMatches = trimmedQuery
+    ? GUEST_TABLES.filter((g) => g.name.toLowerCase().includes(trimmedQuery.toLowerCase()))
+    : []
 
   return (
     <div className="wedding-page">
@@ -60,6 +85,27 @@ export default function WeddingSite() {
       </section>
 
       <section className="wedding-section">
+        <p className="wedding-eyebrow wedding-eyebrow--center">timeline</p>
+        <div className="wedding-card">
+          <div className="wedding-timeline">
+            {TIMELINE.map((item, i) => (
+              <div className="wedding-timeline-item" key={item.title}>
+                <div className="wedding-timeline-time">{item.time}</div>
+                <div className="wedding-timeline-marker-col">
+                  <span className="wedding-timeline-dot" />
+                  {i !== TIMELINE.length - 1 && <span className="wedding-timeline-line" />}
+                </div>
+                <div className="wedding-timeline-content">
+                  <h3 className="wedding-timeline-title">{item.title}</h3>
+                  <p className="wedding-timeline-desc">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="wedding-section">
         <p className="wedding-eyebrow wedding-eyebrow--center">venue</p>
         <div className="wedding-card wedding-card--center">
           <h2 className="wedding-venue-name">The Athenee Hotel</h2>
@@ -78,6 +124,30 @@ export default function WeddingSite() {
       </section>
 
       <section className="wedding-section">
+        <p className="wedding-eyebrow wedding-eyebrow--center">gallery</p>
+        <div className="wedding-card wedding-card--center">
+          {GALLERY_IMAGES.length > 0 ? (
+            <div className="wedding-gallery-grid">
+              {GALLERY_IMAGES.map((img, i) => (
+                <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
+              ))}
+            </div>
+          ) : (
+            <>
+              <div className="wedding-gallery-empty-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7D5A5A" strokeWidth="1.5">
+                  <rect x="3" y="7" width="18" height="13" rx="2" />
+                  <path d="M8 7l1.5-2.5h5L16 7" />
+                  <circle cx="12" cy="13.5" r="3.2" />
+                </svg>
+              </div>
+              <p className="wedding-gallery-empty-text">ภาพพรีเวดดิ้งจะอัปเดตเร็วๆ นี้</p>
+            </>
+          )}
+        </div>
+      </section>
+
+      <section className="wedding-section">
         <p className="wedding-eyebrow wedding-eyebrow--center">rsvp</p>
         <div className="wedding-card wedding-card--center">
           <h2 className="wedding-rsvp-question">ท่านจะเข้าร่วมงานหรือไม่</h2>
@@ -92,6 +162,37 @@ export default function WeddingSite() {
           </div>
           {rsvpStatus === 'yes' && <p className="wedding-rsvp-message">ขอบคุณค่ะ บันทึกแล้วว่าจะเข้าร่วม</p>}
           {rsvpStatus === 'no' && <p className="wedding-rsvp-message">เสียดายจัง ขอบคุณที่แจ้งล่วงหน้านะคะ</p>}
+        </div>
+      </section>
+
+      <section className="wedding-section">
+        <p className="wedding-eyebrow wedding-eyebrow--center">find your table</p>
+        <div className="wedding-card wedding-card--center">
+          <h2 className="wedding-table-question">ค้นหาโต๊ะของท่าน</h2>
+          <p className="wedding-table-sub">พิมพ์ชื่อ-นามสกุลของท่าน</p>
+          <input
+            type="text"
+            className="wedding-input"
+            placeholder="เช่น สมชาย ใจดี"
+            value={tableQuery}
+            onChange={(e) => setTableQuery(e.target.value)}
+          />
+          {trimmedQuery !== '' && (
+            tableMatches.length > 0 ? (
+              <ul className="wedding-table-results">
+                {tableMatches.map((g) => (
+                  <li key={g.name} className="wedding-table-result-item">
+                    <span>{g.name}</span>
+                    <span className="wedding-table-number">โต๊ะ {g.table}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="wedding-table-empty">
+                ไม่พบชื่อนี้ในรายชื่อ ลองตรวจสอบการสะกด หรือทักหาเจ้าบ่าวเจ้าสาวได้เลยค่ะ
+              </p>
+            )
+          )}
         </div>
       </section>
 

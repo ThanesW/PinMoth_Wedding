@@ -8,20 +8,7 @@
   font-display: swap;
 }
 
-.wedding-names-script {
-  font-family: 'Perfections', 'Bodoni Moda', serif;
-  font-size: 34px;
-  font-weight: 400;
-  color: var(--olive-dark);
-  margin: 4px 0 0;
-  line-height: 1.3;
-}
-
-.wedding-names-script--main {
-  font-size: 54px;
-  margin: 0 0 6px;
-}
-
+/* ---- design tokens ---- */
 .wedding-page {
   --olive: #7D5A5A;
   --olive-dark: #7D5A5A;
@@ -30,23 +17,29 @@
   --ivory: #F3E1E1;
   --ink: #7D5A5A;
   --ink-soft: #7D5A5A;
+  --max-w: 680px;
 
-  max-width: 480px;
-  margin: 0 auto;
+  width: 100%;
   background: var(--cream);
   font-family: 'Prompt', sans-serif;
   color: var(--ink);
-  overflow: hidden;
+  overflow-x: hidden;
+}
+
+/* ---- inner container ---- */
+.wedding-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 /* ---- nav ---- */
-
 .wedding-nav {
   position: sticky;
   top: 0;
   z-index: 10;
   background: var(--olive);
-  padding: 14px 18px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,11 +50,12 @@
   font-size: 17px;
   color: var(--gold);
   letter-spacing: 1px;
+  flex-shrink: 0;
 }
 
 .wedding-nav-links {
   display: flex;
-  gap: 12px;
+  gap: 20px;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -72,7 +66,7 @@
   background: none;
   border: none;
   font-family: 'Prompt', sans-serif;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--gold);
   opacity: 0.85;
   white-space: nowrap;
@@ -81,12 +75,9 @@
 }
 
 .wedding-nav-link:hover,
-.wedding-nav-link:focus-visible {
-  opacity: 1;
-}
+.wedding-nav-link:focus-visible { opacity: 1; }
 
 /* ---- reveal-on-scroll ---- */
-
 .wedding-reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -99,22 +90,27 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wedding-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  .wedding-reveal { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---- hero ---- */
-
 .wedding-hero {
+  width: 100%;
   text-align: center;
-  padding: 56px 24px 46px;
+  padding: 80px 24px 60px;
   position: relative;
   background-image: linear-gradient(rgba(250, 242, 242, 0.82), rgba(250, 242, 242, 0.88)), url('/photos/pre-wed-06.jpg');
   background-size: cover;
   background-position: center 30%;
+}
+
+.wedding-names-script {
+  font-family: 'Perfections', 'Bodoni Moda', serif;
+  font-size: 54px;
+  font-weight: 400;
+  color: var(--olive-dark);
+  margin: 0 0 6px;
+  line-height: 1.3;
 }
 
 .wedding-eyebrow {
@@ -145,7 +141,7 @@
 .wedding-countdown {
   display: flex;
   justify-content: center;
-  gap: 14px;
+  gap: 24px;
 }
 
 .wedding-countdown-box {
@@ -157,14 +153,14 @@
 .wedding-countdown-number {
   font-family: 'Bodoni Moda', serif;
   font-weight: 600;
-  font-size: 28px;
+  font-size: 36px;
   color: var(--olive-dark);
   line-height: 1;
 }
 
 .wedding-countdown-label {
   font-family: 'Prompt', sans-serif;
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 1.5px;
   color: var(--gold);
   margin-top: 6px;
@@ -172,49 +168,37 @@
 }
 
 /* ---- intro ---- */
-
 .wedding-intro {
-  padding: 4px 30px 8px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.9;
   color: var(--ink-soft);
+  padding: 28px 0 8px;
 }
 
-/* ---- sections (shared) ---- */
-
+/* ---- sections ---- */
 .wedding-section {
-  padding: 30px 24px;
+  padding: 48px 24px;
 }
 
 .wedding-section--olive {
   background: var(--olive);
 }
 
-.wedding-eyebrow--center {
-  text-align: center;
-}
-
-.wedding-eyebrow--light {
-  color: var(--gold);
-}
+.wedding-eyebrow--center { text-align: center; }
+.wedding-eyebrow--light { color: var(--gold); }
 
 .wedding-card {
   background: var(--ivory);
   border: 1px solid rgba(125, 90, 90, 0.18);
   border-radius: 4px;
-  padding: 26px 22px;
+  padding: 32px 28px;
 }
 
-.wedding-card--center {
-  text-align: center;
-}
+.wedding-card--center { text-align: center; }
 
 /* ---- timeline ---- */
-
-.wedding-timeline {
-  text-align: left;
-}
+.wedding-timeline { text-align: left; }
 
 .wedding-timeline-item {
   display: flex;
@@ -222,9 +206,7 @@
   padding-bottom: 22px;
 }
 
-.wedding-timeline-item:last-child {
-  padding-bottom: 0;
-}
+.wedding-timeline-item:last-child { padding-bottom: 0; }
 
 .wedding-timeline-time {
   font-family: 'Bodoni Moda', serif;
@@ -259,10 +241,7 @@
   margin-top: 4px;
 }
 
-.wedding-timeline-content {
-  flex: 1;
-  padding-bottom: 2px;
-}
+.wedding-timeline-content { flex: 1; padding-bottom: 2px; }
 
 .wedding-timeline-title {
   font-family: 'Prompt', sans-serif;
@@ -273,14 +252,13 @@
 }
 
 .wedding-timeline-desc {
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--ink-soft);
   margin: 0;
   line-height: 1.6;
 }
 
 /* ---- venue ---- */
-
 .wedding-venue-name {
   font-family: 'Bodoni Moda', serif;
   font-style: italic;
@@ -301,7 +279,7 @@
   border: 1px solid rgba(125, 90, 90, 0.25);
   border-radius: 4px;
   overflow: hidden;
-  height: 160px;
+  height: 220px;
   margin: 0 0 18px;
 }
 
@@ -318,8 +296,7 @@
   margin: 0 0 20px;
 }
 
-/* ---- memory wall / gallery ---- */
-
+/* ---- gallery ---- */
 .wedding-gallery-masonry {
   column-count: 2;
   column-gap: 10px;
@@ -337,8 +314,8 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(241, 209, 209, 0.5);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(241,209,209,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -353,7 +330,6 @@
 }
 
 /* ---- rsvp ---- */
-
 .wedding-rsvp-question {
   font-family: 'Prompt', sans-serif;
   font-weight: 600;
@@ -382,7 +358,6 @@
 }
 
 /* ---- find your table ---- */
-
 .wedding-table-question {
   font-family: 'Prompt', sans-serif;
   font-weight: 600;
@@ -402,7 +377,6 @@
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid var(--gold);
-  border-radius: 0;
   padding: 10px 4px;
   font-size: 14px;
   font-family: 'Prompt', sans-serif;
@@ -412,29 +386,17 @@
   text-align: center;
 }
 
-.wedding-input::placeholder {
-  color: var(--ink-soft);
-  opacity: 0.6;
-}
+.wedding-input::placeholder { color: var(--ink-soft); opacity: 0.6; }
+.wedding-input:focus-visible { outline: none; border-bottom-color: var(--olive-dark); }
 
-.wedding-input:focus-visible {
-  outline: none;
-  border-bottom-color: var(--olive-dark);
-}
-
-.wedding-table-results {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  text-align: left;
-}
+.wedding-table-results { list-style: none; margin: 0; padding: 0; text-align: left; }
 
 .wedding-table-result-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 11px 14px;
-  border: 1px solid rgba(125, 90, 90, 0.2);
+  border: 1px solid rgba(125,90,90,0.2);
   border-radius: 4px;
   margin-bottom: 8px;
   font-size: 13px;
@@ -448,14 +410,9 @@
   color: var(--olive-dark);
 }
 
-.wedding-table-empty {
-  font-size: 13px;
-  color: var(--ink-soft);
-  margin: 0;
-}
+.wedding-table-empty { font-size: 13px; color: var(--ink-soft); margin: 0; }
 
 /* ---- buttons ---- */
-
 .wedding-btn {
   display: inline-flex;
   align-items: center;
@@ -464,7 +421,7 @@
   color: var(--olive-dark);
   background: transparent;
   border-radius: 2px;
-  padding: 11px 26px;
+  padding: 11px 28px;
   font-size: 13px;
   letter-spacing: 0.5px;
   font-family: 'Prompt', sans-serif;
@@ -474,45 +431,16 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.wedding-btn:hover {
-  background: var(--olive-dark);
-  color: var(--cream);
-}
+.wedding-btn:hover { background: var(--olive-dark); color: var(--cream); }
+.wedding-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.wedding-btn--fill { background: var(--olive-dark); color: var(--cream); }
+.wedding-btn--fill:hover { background: var(--olive); }
 
-.wedding-btn:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-}
-
-.wedding-btn--fill {
-  background: var(--olive-dark);
-  color: var(--cream);
-}
-
-.wedding-btn--fill:hover {
-  background: var(--olive);
-}
-
-.wedding-btn--outline-light {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-.wedding-btn--outline-light:hover {
-  background: var(--gold);
-  color: var(--olive-dark);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wedding-btn {
-    transition: none;
-  }
-}
+@media (prefers-reduced-motion: reduce) { .wedding-btn { transition: none; } }
 
 /* ---- footer ---- */
-
 .wedding-footer {
-  padding: 30px 24px 40px;
+  padding: 36px 24px 44px;
   text-align: center;
   background: var(--olive);
 }
@@ -531,4 +459,45 @@
   color: var(--cream);
   opacity: 0.9;
   margin: 0;
+}
+
+/* ============================================================
+   DESKTOP BREAKPOINT (≥ 768px)
+   ============================================================ */
+@media (min-width: 768px) {
+  .wedding-page { --max-w: 1100px; }
+
+  /* hero — taller, bigger text */
+  .wedding-hero { padding: 120px 48px 100px; }
+  .wedding-names-script { font-size: 96px; }
+  .wedding-eyebrow { font-size: 16px; letter-spacing: 6px; }
+  .wedding-date { font-size: 22px; }
+  .wedding-countdown { gap: 48px; }
+  .wedding-countdown-number { font-size: 52px; }
+  .wedding-countdown-label { font-size: 12px; }
+
+  /* nav */
+  .wedding-nav { padding: 18px 48px; }
+  .wedding-nav-mark { font-size: 20px; }
+  .wedding-nav-links { gap: 32px; }
+  .wedding-nav-link { font-size: 14px; }
+
+  /* sections */
+  .wedding-section { padding: 64px 48px; }
+
+  /* timeline + venue — side by side */
+  .wedding-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* gallery — 3 columns */
+  .wedding-gallery-masonry { column-count: 3; }
+
+  /* map taller */
+  .wedding-map-embed { height: 320px; }
+
+  /* intro */
+  .wedding-intro { font-size: 17px; padding: 40px 0 12px; }
 }

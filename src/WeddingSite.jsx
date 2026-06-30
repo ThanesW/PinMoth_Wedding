@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import './WeddingSite.css'
 
-// แก้วันเวลาแต่งงานที่นี่ (ใช้ +07:00 เพื่อให้ countdown ถูกต้องไม่ว่าใครจะเปิดจากเขตเวลาไหน)
 const WEDDING_DATE = new Date('2026-12-19T18:00:00+07:00')
 
-// แก้ลิงก์แผนที่ตรงนี้ ถ้าเปลี่ยนสถานที่
 const MAP_URL =
-  'https://www.google.co.th/maps/place/The+Athenee+Hotel,+a+Luxury+Collection+Hotel,+Bangkok/@13.7413541,100.5452001,17z/data=!4m9!3m8!1s0x30e2974d07377631:0xfd90058d241e8d30!5m2!4m1!1i2!8m2!3d13.7413541!4d100.547775!16s%2Fg%2F1v_v_ttb'
+  'https://www.google.co.th/maps/place/The+Athenee+Hotel,+a+Luxury+Collection+Hotel,+Bangkok/@13.7413541,100.5452001,17z'
 
-// เมนูบนแถบนำทาง — id ต้องตรงกับ id ของแต่ละ section ด้านล่าง
 const NAV_ITEMS = [
   { id: 'hero', label: 'หน้าหลัก' },
   { id: 'table-finder', label: 'ค้นหาโต๊ะ' },
@@ -17,7 +14,6 @@ const NAV_ITEMS = [
   { id: 'memory-wall', label: 'Memory Wall' },
 ]
 
-// ตัวอย่างกำหนดการ — แก้เวลา/หัวข้อ/คำอธิบายให้ตรงกับงานจริง เพิ่ม/ลบรายการได้เลย
 const TIMELINE = [
   { time: '16:00', title: 'พิธีหมั้น', desc: 'พิธีสงฆ์และพิธีหมั้นแบบไทย' },
   { time: '17:00', title: 'ถ่ายภาพ', desc: 'ถ่ายภาพร่วมกับครอบครัวและเพื่อนๆ' },
@@ -25,7 +21,6 @@ const TIMELINE = [
   { time: '20:30', title: 'อวยพรคู่บ่าวสาว', desc: 'ช่วงเวลาพิเศษส่งท้ายงาน' },
 ]
 
-// รูปพรีเวดดิ้ง — เพิ่ม/ลบ/สลับลำดับได้โดยแก้ array นี้ ไฟล์รูปอยู่ที่ public/photos/
 const GALLERY_IMAGES = [
   { src: '/photos/pre-wed-01.jpg', alt: 'ปิ่นกับแมมมอธบนสะพานเหล็ก ถือดอกกุหลาบสีชมพู' },
   { src: '/photos/pre-wed-02.jpg', alt: 'ปิ่นกับแมมมอธนั่งเล่นบนราวสะพานพระพุทธยอดฟ้า' },
@@ -36,7 +31,6 @@ const GALLERY_IMAGES = [
   { src: '/photos/pre-wed-07.jpg', alt: 'ปิ่นกับแมมมอธในชุดกิโมโน โชว์แหวนหมั้นใต้ต้นซากุระ' },
 ]
 
-// ตัวอย่างรายชื่อแขก — แทนที่ทั้งหมดด้วยรายชื่อจริงก่อนแชร์ลิงก์ให้แขก (ชื่อด้านล่างเป็นชื่อสมมติ)
 const GUEST_TABLES = [
   { name: 'สมชาย ใจดี', table: 'A1' },
   { name: 'วิภาวรรณ สุขใจ', table: 'A2' },
@@ -53,26 +47,18 @@ function getTimeLeft() {
   }
 }
 
-// ใส่ ref ของ section ใดๆ เข้าฟังก์ชันนี้ แล้ว element จะค่อยๆ เลื่อนปรากฏตอน scroll เข้ามาในจอ
 function useReveal() {
   const ref = useRef(null)
-
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('is-visible')
-          observer.unobserve(el)
-        }
-      },
-      { threshold: 0.15 }
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add('is-visible'); observer.unobserve(el) } },
+      { threshold: 0.12 }
     )
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
-
   return ref
 }
 
@@ -99,8 +85,7 @@ export default function WeddingSite() {
     : []
 
   const introRef = useReveal()
-  const timelineRef = useReveal()
-  const venueRef = useReveal()
+  const midRef = useReveal()
   const galleryRef = useReveal()
   const rsvpRef = useReveal()
   const tableRef = useReveal()
@@ -115,12 +100,7 @@ export default function WeddingSite() {
         <span className="wedding-nav-mark">P &amp; M</span>
         <div className="wedding-nav-links">
           {NAV_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              className="wedding-nav-link"
-              onClick={() => scrollToSection(item.id)}
-            >
+            <button key={item.id} type="button" className="wedding-nav-link" onClick={() => scrollToSection(item.id)}>
               {item.label}
             </button>
           ))}
@@ -129,7 +109,7 @@ export default function WeddingSite() {
 
       <section id="hero" className="wedding-hero">
         <p className="wedding-eyebrow">the wedding of</p>
-        <p className="wedding-names-script wedding-names-script--main">Pin &amp; Mammoth</p>
+        <p className="wedding-names-script">Pin &amp; Mammoth</p>
         <div className="wedding-divider" />
         <p className="wedding-date">19 December 2026</p>
         <div className="wedding-countdown">
@@ -143,129 +123,133 @@ export default function WeddingSite() {
       </section>
 
       <div ref={introRef} className="wedding-reveal">
-        <div className="wedding-intro">
-          <p>
-            ขอเชิญทุกท่านร่วมเป็นสักขีพยาน
-            <br />
-            ในวันสำคัญของเรา
+        <div className="wedding-inner">
+          <p className="wedding-intro">
+            ขอเชิญทุกท่านร่วมเป็นสักขีพยาน<br />ในวันสำคัญของเรา
           </p>
         </div>
       </div>
 
-      <section id="timeline" ref={timelineRef} className="wedding-section wedding-reveal">
-        <p className="wedding-eyebrow wedding-eyebrow--center">timeline</p>
-        <div className="wedding-card">
-          <div className="wedding-timeline">
-            {TIMELINE.map((item, i) => (
-              <div className="wedding-timeline-item" key={item.title}>
-                <div className="wedding-timeline-time">{item.time}</div>
-                <div className="wedding-timeline-marker-col">
-                  <span className="wedding-timeline-dot" />
-                  {i !== TIMELINE.length - 1 && <span className="wedding-timeline-line" />}
-                </div>
-                <div className="wedding-timeline-content">
-                  <h3 className="wedding-timeline-title">{item.title}</h3>
-                  <p className="wedding-timeline-desc">{item.desc}</p>
-                </div>
+      <section ref={midRef} className="wedding-section wedding-reveal">
+        <div className="wedding-inner wedding-two-col">
+          <div id="timeline">
+            <p className="wedding-eyebrow">timeline</p>
+            <div className="wedding-card">
+              <div className="wedding-timeline">
+                {TIMELINE.map((item, i) => (
+                  <div className="wedding-timeline-item" key={item.title}>
+                    <div className="wedding-timeline-time">{item.time}</div>
+                    <div className="wedding-timeline-marker-col">
+                      <span className="wedding-timeline-dot" />
+                      {i !== TIMELINE.length - 1 && <span className="wedding-timeline-line" />}
+                    </div>
+                    <div className="wedding-timeline-content">
+                      <h3 className="wedding-timeline-title">{item.title}</h3>
+                      <p className="wedding-timeline-desc">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="venue" ref={venueRef} className="wedding-section wedding-reveal">
-        <p className="wedding-eyebrow wedding-eyebrow--center">venue</p>
-        <div className="wedding-card wedding-card--center">
-          <h2 className="wedding-venue-name">The Athenee Hotel</h2>
-          <p className="wedding-venue-sub">a Luxury Collection Hotel, Bangkok</p>
-          <div className="wedding-map-embed">
-            <iframe
-              title="แผนที่ The Athenee Hotel"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.621443029729!2d100.54520007509002!3d13.741354086649425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2974d07377631%3A0xfd90058d241e8d30!2sThe%20Athenee%20Hotel%2C%20a%20Luxury%20Collection%20Hotel%2C%20Bangkok!5e0!3m2!1sen!2sth!4v1782820744309!5m2!1sen!2sth"
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            />
-          </div>
-          <p className="wedding-venue-time">งานเลี้ยง · 18:00 น. เป็นต้นไป</p>
-          <a className="wedding-btn wedding-btn--fill" href={MAP_URL} target="_blank" rel="noopener noreferrer">
-            ดูแผนที่
-          </a>
-        </div>
-      </section>
-
-      <section
-        id="memory-wall"
-        ref={galleryRef}
-        className="wedding-section wedding-section--olive wedding-reveal"
-      >
-        <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">memory wall</p>
-        {GALLERY_IMAGES.length > 0 ? (
-          <div className="wedding-gallery-masonry">
-            {GALLERY_IMAGES.map((img, i) => (
-              <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
-            ))}
-          </div>
-        ) : (
-          <div style={{ textAlign: 'center' }}>
-            <div className="wedding-gallery-empty-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F1D1D1" strokeWidth="1.4">
-                <rect x="3" y="7" width="18" height="13" rx="2" />
-                <path d="M8 7l1.5-2.5h5L16 7" />
-                <circle cx="12" cy="13.5" r="3.2" />
-              </svg>
             </div>
-            <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
           </div>
-        )}
+
+          <div id="venue">
+            <p className="wedding-eyebrow">venue</p>
+            <div className="wedding-card wedding-card--center">
+              <h2 className="wedding-venue-name">The Athenee Hotel</h2>
+              <p className="wedding-venue-sub">a Luxury Collection Hotel, Bangkok</p>
+              <div className="wedding-map-embed">
+                <iframe
+                  title="แผนที่ The Athenee Hotel"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.621443029729!2d100.54520007509002!3d13.741354086649425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2974d07377631%3A0xfd90058d241e8d30!2sThe%20Athenee%20Hotel%2C%20a%20Luxury%20Collection%20Hotel%2C%20Bangkok!5e0!3m2!1sen!2sth!4v1782820744309!5m2!1sen!2sth"
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+              <p className="wedding-venue-time">งานเลี้ยง · 18:00 น. เป็นต้นไป</p>
+              <a className="wedding-btn wedding-btn--fill" href={MAP_URL} target="_blank" rel="noopener noreferrer">
+                ดูแผนที่
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="memory-wall" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
+        <div className="wedding-inner">
+          <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">memory wall</p>
+          {GALLERY_IMAGES.length > 0 ? (
+            <div className="wedding-gallery-masonry">
+              {GALLERY_IMAGES.map((img, i) => (
+                <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
+              ))}
+            </div>
+          ) : (
+            <div style={{ textAlign: 'center' }}>
+              <div className="wedding-gallery-empty-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F1D1D1" strokeWidth="1.4">
+                  <rect x="3" y="7" width="18" height="13" rx="2" />
+                  <path d="M8 7l1.5-2.5h5L16 7" />
+                  <circle cx="12" cy="13.5" r="3.2" />
+                </svg>
+              </div>
+              <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
+            </div>
+          )}
+        </div>
       </section>
 
       <section ref={rsvpRef} className="wedding-section wedding-reveal">
-        <p className="wedding-eyebrow wedding-eyebrow--center">rsvp</p>
-        <div className="wedding-card wedding-card--center">
-          <h2 className="wedding-rsvp-question">ท่านจะเข้าร่วมงานหรือไม่</h2>
-          <p className="wedding-rsvp-sub">กรุณายืนยันก่อนวันที่ 30 พฤศจิกายน</p>
-          <div className="wedding-rsvp-buttons">
-            <button type="button" className="wedding-btn wedding-btn--fill" onClick={() => setRsvpStatus('yes')}>
-              เข้าร่วม
-            </button>
-            <button type="button" className="wedding-btn" onClick={() => setRsvpStatus('no')}>
-              ไม่สามารถ
-            </button>
+        <div className="wedding-inner">
+          <p className="wedding-eyebrow wedding-eyebrow--center">rsvp</p>
+          <div className="wedding-card wedding-card--center" style={{ maxWidth: 480, margin: '0 auto' }}>
+            <h2 className="wedding-rsvp-question">ท่านจะเข้าร่วมงานหรือไม่</h2>
+            <p className="wedding-rsvp-sub">กรุณายืนยันก่อนวันที่ 30 พฤศจิกายน</p>
+            <div className="wedding-rsvp-buttons">
+              <button type="button" className="wedding-btn wedding-btn--fill" onClick={() => setRsvpStatus('yes')}>
+                เข้าร่วม
+              </button>
+              <button type="button" className="wedding-btn" onClick={() => setRsvpStatus('no')}>
+                ไม่สามารถ
+              </button>
+            </div>
+            {rsvpStatus === 'yes' && <p className="wedding-rsvp-message">ขอบคุณค่ะ บันทึกแล้วว่าจะเข้าร่วม</p>}
+            {rsvpStatus === 'no' && <p className="wedding-rsvp-message">เสียดายจัง ขอบคุณที่แจ้งล่วงหน้านะคะ</p>}
           </div>
-          {rsvpStatus === 'yes' && <p className="wedding-rsvp-message">ขอบคุณค่ะ บันทึกแล้วว่าจะเข้าร่วม</p>}
-          {rsvpStatus === 'no' && <p className="wedding-rsvp-message">เสียดายจัง ขอบคุณที่แจ้งล่วงหน้านะคะ</p>}
         </div>
       </section>
 
       <section id="table-finder" ref={tableRef} className="wedding-section wedding-reveal">
-        <p className="wedding-eyebrow wedding-eyebrow--center">find your table</p>
-        <div className="wedding-card wedding-card--center">
-          <h2 className="wedding-table-question">ค้นหาโต๊ะของท่าน</h2>
-          <p className="wedding-table-sub">พิมพ์ชื่อ-นามสกุลของท่าน</p>
-          <input
-            type="text"
-            className="wedding-input"
-            placeholder="เช่น สมชาย ใจดี"
-            value={tableQuery}
-            onChange={(e) => setTableQuery(e.target.value)}
-          />
-          {trimmedQuery !== '' && (
-            tableMatches.length > 0 ? (
-              <ul className="wedding-table-results">
-                {tableMatches.map((g) => (
-                  <li key={g.name} className="wedding-table-result-item">
-                    <span>{g.name}</span>
-                    <span className="wedding-table-number">โต๊ะ {g.table}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="wedding-table-empty">
-                ไม่พบชื่อนี้ในรายชื่อ ลองตรวจสอบการสะกด หรือทักหาเจ้าบ่าวเจ้าสาวได้เลยค่ะ
-              </p>
-            )
-          )}
+        <div className="wedding-inner">
+          <p className="wedding-eyebrow wedding-eyebrow--center">find your table</p>
+          <div className="wedding-card wedding-card--center" style={{ maxWidth: 480, margin: '0 auto' }}>
+            <h2 className="wedding-table-question">ค้นหาโต๊ะของท่าน</h2>
+            <p className="wedding-table-sub">พิมพ์ชื่อ-นามสกุลของท่าน</p>
+            <input
+              type="text"
+              className="wedding-input"
+              placeholder="เช่น สมชาย ใจดี"
+              value={tableQuery}
+              onChange={(e) => setTableQuery(e.target.value)}
+            />
+            {trimmedQuery !== '' && (
+              tableMatches.length > 0 ? (
+                <ul className="wedding-table-results">
+                  {tableMatches.map((g) => (
+                    <li key={g.name} className="wedding-table-result-item">
+                      <span>{g.name}</span>
+                      <span className="wedding-table-number">โต๊ะ {g.table}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="wedding-table-empty">
+                  ไม่พบชื่อนี้ในรายชื่อ ลองตรวจสอบการสะกด หรือทักหาเจ้าบ่าวเจ้าสาวได้เลยค่ะ
+                </p>
+              )
+            )}
+          </div>
         </div>
       </section>
 

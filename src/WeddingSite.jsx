@@ -131,7 +131,7 @@ export default function WeddingSite() {
         <p className="wedding-eyebrow">the wedding of</p>
         <p className="wedding-names-script wedding-names-script--main">Pin &amp; Mammoth</p>
         <div className="wedding-divider" />
-        <p className="wedding-date">19 ธันวาคม 2569</p>
+        <p className="wedding-date">19 December 2026</p>
         <div className="wedding-countdown">
           {countdownUnits.map((unit) => (
             <div className="wedding-countdown-box" key={unit.label}>

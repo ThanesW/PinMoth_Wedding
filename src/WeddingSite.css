@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Cinzel:wght@500;600&family=Trirong:wght@300;400;500;600&family=Bodoni+Moda:ital,wght@0,500;0,600;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Bodoni+Moda:ital,wght@0,500;0,600;1,500&display=swap');
 
 @font-face {
   font-family: 'Perfections';
@@ -9,7 +9,7 @@
 }
 
 .wedding-names-script {
-  font-family: 'Perfections', 'Cormorant Garamond', serif;
+  font-family: 'Perfections', 'Bodoni Moda', serif;
   font-size: 34px;
   font-weight: 400;
   color: var(--olive-dark);
@@ -34,7 +34,7 @@
   max-width: 480px;
   margin: 0 auto;
   background: var(--cream);
-  font-family: 'Trirong', serif;
+  font-family: 'Prompt', sans-serif;
   color: var(--ink);
   overflow: hidden;
 }
@@ -53,7 +53,7 @@
 }
 
 .wedding-nav-mark {
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
   font-size: 17px;
   color: var(--gold);
   letter-spacing: 1px;
@@ -71,7 +71,7 @@
 .wedding-nav-link {
   background: none;
   border: none;
-  font-family: 'Trirong', serif;
+  font-family: 'Prompt', sans-serif;
   font-size: 12.5px;
   color: var(--gold);
   opacity: 0.85;
@@ -127,16 +127,6 @@
   text-transform: uppercase;
 }
 
-.wedding-names {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-weight: 600;
-  font-size: 44px;
-  color: var(--olive-dark);
-  margin: 0 0 14px;
-  line-height: 1.2;
-}
-
 .wedding-divider {
   width: 46px;
   height: 1px;
@@ -145,7 +135,7 @@
 }
 
 .wedding-date {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Bodoni Moda', serif;
   font-size: 18px;
   letter-spacing: 1px;
   color: var(--ink-soft);
@@ -165,7 +155,7 @@
 }
 
 .wedding-countdown-number {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Bodoni Moda', serif;
   font-weight: 600;
   font-size: 28px;
   color: var(--olive-dark);
@@ -173,7 +163,7 @@
 }
 
 .wedding-countdown-label {
-  font-family: 'Cinzel', serif;
+  font-family: 'Prompt', sans-serif;
   font-size: 9px;
   letter-spacing: 1.5px;
   color: var(--gold);
@@ -187,7 +177,6 @@
   padding: 4px 30px 8px;
   text-align: center;
   font-size: 14px;
-  font-style: italic;
   line-height: 1.9;
   color: var(--ink-soft);
 }
@@ -238,7 +227,7 @@
 }
 
 .wedding-timeline-time {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Bodoni Moda', serif;
   font-weight: 600;
   font-size: 15px;
   color: var(--olive-dark);
@@ -276,9 +265,9 @@
 }
 
 .wedding-timeline-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
-  font-size: 19px;
+  font-size: 17px;
   color: var(--olive-dark);
   margin: 0 0 3px;
 }
@@ -293,7 +282,7 @@
 /* ---- venue ---- */
 
 .wedding-venue-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Bodoni Moda', serif;
   font-style: italic;
   font-weight: 600;
   font-size: 24px;
@@ -302,6 +291,7 @@
 }
 
 .wedding-venue-sub {
+  font-family: 'Bodoni Moda', serif;
   font-size: 13px;
   color: var(--ink-soft);
   margin: 0 0 18px;
@@ -357,7 +347,6 @@
 
 .wedding-gallery-empty-text {
   font-size: 13px;
-  font-style: italic;
   color: var(--cream);
   opacity: 0.8;
   margin: 0;
@@ -366,10 +355,9 @@
 /* ---- rsvp ---- */
 
 .wedding-rsvp-question {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 19px;
   color: var(--olive-dark);
   margin: 0 0 4px;
 }
@@ -389,7 +377,6 @@
 
 .wedding-rsvp-message {
   font-size: 13px;
-  font-style: italic;
   color: var(--ink-soft);
   margin: 0;
 }
@@ -397,10 +384,9 @@
 /* ---- find your table ---- */
 
 .wedding-table-question {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
-  font-size: 22px;
+  font-size: 19px;
   color: var(--olive-dark);
   margin: 0 0 4px;
 }
@@ -419,7 +405,7 @@
   border-radius: 0;
   padding: 10px 4px;
   font-size: 14px;
-  font-family: 'Trirong', serif;
+  font-family: 'Prompt', sans-serif;
   color: var(--ink);
   background: transparent;
   margin: 0 0 16px;
@@ -457,7 +443,7 @@
 }
 
 .wedding-table-number {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Prompt', sans-serif;
   font-weight: 600;
   color: var(--olive-dark);
 }
@@ -479,10 +465,10 @@
   background: transparent;
   border-radius: 2px;
   padding: 11px 26px;
-  font-size: 12.5px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  font-family: 'Prompt', sans-serif;
+  font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   transition: background 0.3s ease, color 0.3s ease;
@@ -532,7 +518,7 @@
 }
 
 .wedding-footer-mark {
-  font-family: 'Cinzel', serif;
+  font-family: 'Bodoni Moda', serif;
   font-size: 14px;
   color: var(--gold);
   letter-spacing: 1px;
@@ -540,7 +526,7 @@
 }
 
 .wedding-footer-text {
-  font-family: 'Perfections', 'Cormorant Garamond', serif;
+  font-family: 'Perfections', 'Bodoni Moda', serif;
   font-size: 20px;
   color: var(--cream);
   opacity: 0.9;

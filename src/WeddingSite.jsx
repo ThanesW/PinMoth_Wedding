@@ -181,9 +181,9 @@ export default function WeddingSite() {
           <div className="wedding-map-embed">
             <iframe
               title="แผนที่ The Athenee Hotel"
-              src="https://www.google.com/maps?q=The+Athenee+Hotel+a+Luxury+Collection+Hotel+Bangkok&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.621443029729!2d100.54520007509002!3d13.741354086649425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2974d07377631%3A0xfd90058d241e8d30!2sThe%20Athenee%20Hotel%2C%20a%20Luxury%20Collection%20Hotel%2C%20Bangkok!5e0!3m2!1sen!2sth!4v1782820744309!5m2!1sen!2sth"
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             />
           </div>

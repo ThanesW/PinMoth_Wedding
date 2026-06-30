@@ -303,15 +303,19 @@
   margin: 0 0 18px;
 }
 
-.wedding-map-placeholder {
-  background: #fff;
+.wedding-map-embed {
   border: 1px solid rgba(125, 90, 90, 0.25);
   border-radius: 4px;
-  height: 116px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  height: 160px;
   margin: 0 0 18px;
+}
+
+.wedding-map-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
 }
 
 .wedding-venue-time {

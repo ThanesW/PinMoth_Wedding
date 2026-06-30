@@ -178,11 +178,14 @@ export default function WeddingSite() {
         <div className="wedding-card wedding-card--center">
           <h2 className="wedding-venue-name">The Athenee Hotel</h2>
           <p className="wedding-venue-sub">a Luxury Collection Hotel, Bangkok</p>
-          <div className="wedding-map-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7D5A5A" strokeWidth="1.4">
-              <path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z" />
-              <circle cx="12" cy="9" r="2.3" />
-            </svg>
+          <div className="wedding-map-embed">
+            <iframe
+              title="แผนที่ The Athenee Hotel"
+              src="https://www.google.com/maps?q=The+Athenee+Hotel+a+Luxury+Collection+Hotel+Bangkok&output=embed"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
           <p className="wedding-venue-time">งานเลี้ยง · 18:00 น. เป็นต้นไป</p>
           <a className="wedding-btn wedding-btn--fill" href={MAP_URL} target="_blank" rel="noopener noreferrer">

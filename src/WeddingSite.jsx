@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './WeddingSite.css'
 
 // แก้วันเวลาแต่งงานที่นี่ (ใช้ +07:00 เพื่อให้ countdown ถูกต้องไม่ว่าใครจะเปิดจากเขตเวลาไหน)
@@ -7,6 +7,15 @@ const WEDDING_DATE = new Date('2026-12-19T18:00:00+07:00')
 // แก้ลิงก์แผนที่ตรงนี้ ถ้าเปลี่ยนสถานที่
 const MAP_URL =
   'https://www.google.co.th/maps/place/The+Athenee+Hotel,+a+Luxury+Collection+Hotel,+Bangkok/@13.7413541,100.5452001,17z/data=!4m9!3m8!1s0x30e2974d07377631:0xfd90058d241e8d30!5m2!4m1!1i2!8m2!3d13.7413541!4d100.547775!16s%2Fg%2F1v_v_ttb'
+
+// เมนูบนแถบนำทาง — id ต้องตรงกับ id ของแต่ละ section ด้านล่าง
+const NAV_ITEMS = [
+  { id: 'hero', label: 'หน้าหลัก' },
+  { id: 'table-finder', label: 'ค้นหาโต๊ะ' },
+  { id: 'venue', label: 'สถานที่' },
+  { id: 'timeline', label: 'กำหนดการ' },
+  { id: 'memory-wall', label: 'Memory Wall' },
+]
 
 // ตัวอย่างกำหนดการ — แก้เวลา/หัวข้อ/คำอธิบายให้ตรงกับงานจริง เพิ่ม/ลบรายการได้เลย
 const TIMELINE = [
@@ -17,7 +26,7 @@ const TIMELINE = [
 ]
 
 // เพิ่มรูปจริงตรงนี้ทีหลังได้เลย เช่น { src: '/photos/pre-wed-01.jpg', alt: 'ปิ่นกับแมมมอธที่...' }
-// ถ้า array นี้ว่าง หน้าเว็บจะโชว์ข้อความ "ภาพจะอัปเดตเร็วๆ นี้" แทนโดยอัตโนมัติ
+// ถ้า array นี้ว่าง Memory Wall จะโชว์ข้อความ "ภาพจะอัปเดตเร็วๆ นี้" แทนโดยอัตโนมัติ
 const GALLERY_IMAGES = []
 
 // ตัวอย่างรายชื่อแขก — แทนที่ทั้งหมดด้วยรายชื่อจริงก่อนแชร์ลิงก์ให้แขก (ชื่อด้านล่างเป็นชื่อสมมติ)
@@ -25,15 +34,6 @@ const GUEST_TABLES = [
   { name: 'สมชาย ใจดี', table: 'A1' },
   { name: 'วิภาวรรณ สุขใจ', table: 'A2' },
   { name: 'ธนกร รักเรียน', table: 'B3' },
-]
-
-// ตำแหน่ง/สี/ขนาดจุดคอนเฟ็ตตี้ในส่วน hero — แก้ตัวเลขเพื่อจัดวางใหม่ได้
-const CONFETTI = [
-  { top: '8%', left: '10%', size: 14, color: 'var(--marigold)' },
-  { top: '14%', left: '82%', size: 10, color: 'var(--jade)' },
-  { top: '70%', left: '6%', size: 12, color: 'var(--pink)' },
-  { top: '78%', left: '88%', size: 16, color: 'var(--coral)' },
-  { top: '4%', left: '46%', size: 8, color: 'var(--jade)' },
 ]
 
 function getTimeLeft() {
@@ -44,6 +44,29 @@ function getTimeLeft() {
     minutes: Math.floor((diff % 3600000) / 60000),
     seconds: Math.floor((diff % 60000) / 1000),
   }
+}
+
+// ใส่ ref ของ section ใดๆ เข้าฟังก์ชันนี้ แล้ว element จะค่อยๆ เลื่อนปรากฏตอน scroll เข้ามาในจอ
+function useReveal() {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('is-visible')
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.15 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return ref
 }
 
 export default function WeddingSite() {
@@ -57,10 +80,10 @@ export default function WeddingSite() {
   }, [])
 
   const countdownUnits = [
-    { key: 'days', label: 'วัน', value: timeLeft.days },
-    { key: 'hours', label: 'ชม.', value: timeLeft.hours },
-    { key: 'minutes', label: 'นาที', value: timeLeft.minutes },
-    { key: 'seconds', label: 'วิ', value: timeLeft.seconds },
+    { label: 'วัน', value: timeLeft.days },
+    { label: 'ชม.', value: timeLeft.hours },
+    { label: 'นาที', value: timeLeft.minutes },
+    { label: 'วิ', value: timeLeft.seconds },
   ]
 
   const trimmedQuery = tableQuery.trim()
@@ -68,30 +91,51 @@ export default function WeddingSite() {
     ? GUEST_TABLES.filter((g) => g.name.toLowerCase().includes(trimmedQuery.toLowerCase()))
     : []
 
+  const introRef = useReveal()
+  const timelineRef = useReveal()
+  const venueRef = useReveal()
+  const galleryRef = useReveal()
+  const rsvpRef = useReveal()
+  const tableRef = useReveal()
+
+  function scrollToSection(id) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <div className="wedding-page">
-      <section className="wedding-hero">
-        {CONFETTI.map((dot, i) => (
-          <span
-            key={i}
-            className="wedding-confetti"
-            style={{ top: dot.top, left: dot.left, width: dot.size, height: dot.size, background: dot.color }}
-          />
-        ))}
-        <span className="wedding-badge wedding-badge--center">save the date ✦</span>
+      <nav className="wedding-nav">
+        <span className="wedding-nav-mark">P &amp; M</span>
+        <div className="wedding-nav-links">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className="wedding-nav-link"
+              onClick={() => scrollToSection(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <section id="hero" className="wedding-hero">
+        <p className="wedding-eyebrow">the wedding of</p>
         <h1 className="wedding-names">ปิ่น &amp; แมมมอธ</h1>
+        <div className="wedding-divider" />
         <p className="wedding-date">19 ธันวาคม 2569</p>
         <div className="wedding-countdown">
           {countdownUnits.map((unit) => (
-            <div className={`wedding-sticker wedding-sticker--${unit.key}`} key={unit.key}>
-              <span className="wedding-sticker-number">{unit.value}</span>
-              <span className="wedding-sticker-label">{unit.label}</span>
+            <div className="wedding-countdown-box" key={unit.label}>
+              <span className="wedding-countdown-number">{unit.value}</span>
+              <span className="wedding-countdown-label">{unit.label}</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="wedding-block wedding-block--cream">
+      <div ref={introRef} className="wedding-reveal">
         <div className="wedding-intro">
           <p>
             ขอเชิญทุกท่านร่วมเป็นสักขีพยาน
@@ -99,11 +143,11 @@ export default function WeddingSite() {
             ในวันสำคัญของเรา
           </p>
         </div>
-      </section>
+      </div>
 
-      <section className="wedding-block wedding-block--coral">
-        <span className="wedding-badge wedding-badge--center wedding-badge--light">timeline</span>
-        <div className="wedding-sticker-card">
+      <section id="timeline" ref={timelineRef} className="wedding-section wedding-reveal">
+        <p className="wedding-eyebrow wedding-eyebrow--center">timeline</p>
+        <div className="wedding-card">
           <div className="wedding-timeline">
             {TIMELINE.map((item, i) => (
               <div className="wedding-timeline-item" key={item.title}>
@@ -122,13 +166,13 @@ export default function WeddingSite() {
         </div>
       </section>
 
-      <section className="wedding-block wedding-block--cream">
-        <span className="wedding-badge wedding-badge--center">venue</span>
-        <div className="wedding-sticker-card wedding-sticker-card--center">
+      <section id="venue" ref={venueRef} className="wedding-section wedding-reveal">
+        <p className="wedding-eyebrow wedding-eyebrow--center">venue</p>
+        <div className="wedding-card wedding-card--center">
           <h2 className="wedding-venue-name">The Athenee Hotel</h2>
           <p className="wedding-venue-sub">a Luxury Collection Hotel, Bangkok</p>
           <div className="wedding-map-placeholder">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3A1F3D" strokeWidth="2">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4B5842" strokeWidth="1.4">
               <path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z" />
               <circle cx="12" cy="9" r="2.3" />
             </svg>
@@ -140,51 +184,53 @@ export default function WeddingSite() {
         </div>
       </section>
 
-      <section className="wedding-block wedding-block--jade">
-        <span className="wedding-badge wedding-badge--center wedding-badge--light">gallery</span>
-        <div className="wedding-sticker-card wedding-sticker-card--center">
-          {GALLERY_IMAGES.length > 0 ? (
-            <div className="wedding-gallery-grid">
-              {GALLERY_IMAGES.map((img, i) => (
-                <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
-              ))}
+      <section
+        id="memory-wall"
+        ref={galleryRef}
+        className="wedding-section wedding-section--olive wedding-reveal"
+      >
+        <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">memory wall</p>
+        {GALLERY_IMAGES.length > 0 ? (
+          <div className="wedding-gallery-grid">
+            {GALLERY_IMAGES.map((img, i) => (
+              <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
+            ))}
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center' }}>
+            <div className="wedding-gallery-empty-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A65C" strokeWidth="1.4">
+                <rect x="3" y="7" width="18" height="13" rx="2" />
+                <path d="M8 7l1.5-2.5h5L16 7" />
+                <circle cx="12" cy="13.5" r="3.2" />
+              </svg>
             </div>
-          ) : (
-            <>
-              <div className="wedding-gallery-empty-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3A1F3D" strokeWidth="2">
-                  <rect x="3" y="7" width="18" height="13" rx="2" />
-                  <path d="M8 7l1.5-2.5h5L16 7" />
-                  <circle cx="12" cy="13.5" r="3.2" />
-                </svg>
-              </div>
-              <p className="wedding-gallery-empty-text">ภาพพรีเวดดิ้งจะอัปเดตเร็วๆ นี้</p>
-            </>
-          )}
-        </div>
+            <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
+          </div>
+        )}
       </section>
 
-      <section className="wedding-block wedding-block--cream">
-        <span className="wedding-badge wedding-badge--center">rsvp</span>
-        <div className="wedding-sticker-card wedding-sticker-card--center">
+      <section ref={rsvpRef} className="wedding-section wedding-reveal">
+        <p className="wedding-eyebrow wedding-eyebrow--center">rsvp</p>
+        <div className="wedding-card wedding-card--center">
           <h2 className="wedding-rsvp-question">ท่านจะเข้าร่วมงานหรือไม่</h2>
           <p className="wedding-rsvp-sub">กรุณายืนยันก่อนวันที่ 30 พฤศจิกายน</p>
           <div className="wedding-rsvp-buttons">
             <button type="button" className="wedding-btn wedding-btn--fill" onClick={() => setRsvpStatus('yes')}>
               เข้าร่วม
             </button>
-            <button type="button" className="wedding-btn wedding-btn--fill-alt" onClick={() => setRsvpStatus('no')}>
+            <button type="button" className="wedding-btn" onClick={() => setRsvpStatus('no')}>
               ไม่สามารถ
             </button>
           </div>
-          {rsvpStatus === 'yes' && <p className="wedding-rsvp-message">ขอบคุณค่ะ บันทึกแล้วว่าจะเข้าร่วม 🎉</p>}
+          {rsvpStatus === 'yes' && <p className="wedding-rsvp-message">ขอบคุณค่ะ บันทึกแล้วว่าจะเข้าร่วม</p>}
           {rsvpStatus === 'no' && <p className="wedding-rsvp-message">เสียดายจัง ขอบคุณที่แจ้งล่วงหน้านะคะ</p>}
         </div>
       </section>
 
-      <section className="wedding-block wedding-block--coral">
-        <span className="wedding-badge wedding-badge--center wedding-badge--light">find your table</span>
-        <div className="wedding-sticker-card wedding-sticker-card--center">
+      <section id="table-finder" ref={tableRef} className="wedding-section wedding-reveal">
+        <p className="wedding-eyebrow wedding-eyebrow--center">find your table</p>
+        <div className="wedding-card wedding-card--center">
           <h2 className="wedding-table-question">ค้นหาโต๊ะของท่าน</h2>
           <p className="wedding-table-sub">พิมพ์ชื่อ-นามสกุลของท่าน</p>
           <input
@@ -213,7 +259,8 @@ export default function WeddingSite() {
         </div>
       </section>
 
-      <footer className="wedding-block wedding-block--plum wedding-footer">
+      <footer className="wedding-footer">
+        <p className="wedding-footer-mark">P &amp; M</p>
         <p className="wedding-footer-text">with love, Pin &amp; Mammoth</p>
       </footer>
     </div>

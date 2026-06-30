@@ -17,6 +17,11 @@
   line-height: 1.3;
 }
 
+.wedding-names-script--main {
+  font-size: 54px;
+  margin: 0 0 6px;
+}
+
 .wedding-page {
   --olive: #7D5A5A;
   --olive-dark: #7D5A5A;

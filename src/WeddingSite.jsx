@@ -25,9 +25,16 @@ const TIMELINE = [
   { time: '20:30', title: 'อวยพรคู่บ่าวสาว', desc: 'ช่วงเวลาพิเศษส่งท้ายงาน' },
 ]
 
-// เพิ่มรูปจริงตรงนี้ทีหลังได้เลย เช่น { src: '/photos/pre-wed-01.jpg', alt: 'ปิ่นกับแมมมอธที่...' }
-// ถ้า array นี้ว่าง Memory Wall จะโชว์ข้อความ "ภาพจะอัปเดตเร็วๆ นี้" แทนโดยอัตโนมัติ
-const GALLERY_IMAGES = []
+// รูปพรีเวดดิ้ง — เพิ่ม/ลบ/สลับลำดับได้โดยแก้ array นี้ ไฟล์รูปอยู่ที่ public/photos/
+const GALLERY_IMAGES = [
+  { src: '/photos/pre-wed-01.jpg', alt: 'ปิ่นกับแมมมอธบนสะพานเหล็ก ถือดอกกุหลาบสีชมพู' },
+  { src: '/photos/pre-wed-02.jpg', alt: 'ปิ่นกับแมมมอธนั่งเล่นบนราวสะพานพระพุทธยอดฟ้า' },
+  { src: '/photos/pre-wed-03.jpg', alt: 'ปิ่นกับแมมมอธยืนหน้าตึกเก่าย่านเมืองเก่ายามค่ำ' },
+  { src: '/photos/pre-wed-04.jpg', alt: 'ปิ่นกับแมมมอธเดินจูงมือกันยามค่ำคืน' },
+  { src: '/photos/pre-wed-05.jpg', alt: 'ปิ่นกับแมมมอธในชุดกิโมโน ใต้ต้นซากุระที่เกียวโต' },
+  { src: '/photos/pre-wed-06.jpg', alt: 'แหวนหมั้นในกล่องสีแดง ใต้ดอกซากุระ' },
+  { src: '/photos/pre-wed-07.jpg', alt: 'ปิ่นกับแมมมอธในชุดกิโมโน โชว์แหวนหมั้นใต้ต้นซากุระ' },
+]
 
 // ตัวอย่างรายชื่อแขก — แทนที่ทั้งหมดด้วยรายชื่อจริงก่อนแชร์ลิงก์ให้แขก (ชื่อด้านล่างเป็นชื่อสมมติ)
 const GUEST_TABLES = [
@@ -191,7 +198,7 @@ export default function WeddingSite() {
       >
         <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">memory wall</p>
         {GALLERY_IMAGES.length > 0 ? (
-          <div className="wedding-gallery-grid">
+          <div className="wedding-gallery-scroll">
             {GALLERY_IMAGES.map((img, i) => (
               <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
             ))}

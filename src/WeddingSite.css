@@ -322,17 +322,32 @@
 
 /* ---- memory wall / gallery ---- */
 
-.wedding-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 7px;
+.wedding-gallery-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 12px;
+  margin: 0 -4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.wedding-gallery-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.wedding-gallery-scroll::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
 }
 
 .wedding-gallery-photo {
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  flex: 0 0 76%;
+  scroll-snap-align: center;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  border-radius: 3px;
+  border-radius: 4px;
   display: block;
 }
 

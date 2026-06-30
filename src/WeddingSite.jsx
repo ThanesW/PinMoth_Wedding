@@ -198,7 +198,7 @@ export default function WeddingSite() {
       >
         <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">memory wall</p>
         {GALLERY_IMAGES.length > 0 ? (
-          <div className="wedding-gallery-scroll">
+          <div className="wedding-gallery-masonry">
             {GALLERY_IMAGES.map((img, i) => (
               <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
             ))}

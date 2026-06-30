@@ -111,7 +111,10 @@
 .wedding-hero {
   text-align: center;
   padding: 56px 24px 46px;
-  background: var(--cream);
+  position: relative;
+  background-image: linear-gradient(rgba(250, 242, 242, 0.82), rgba(250, 242, 242, 0.88)), url('/photos/pre-wed-06.jpg');
+  background-size: cover;
+  background-position: center 30%;
 }
 
 .wedding-eyebrow {

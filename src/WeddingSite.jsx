@@ -172,7 +172,7 @@ export default function WeddingSite() {
           <h2 className="wedding-venue-name">The Athenee Hotel</h2>
           <p className="wedding-venue-sub">a Luxury Collection Hotel, Bangkok</p>
           <div className="wedding-map-placeholder">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#4B5842" strokeWidth="1.4">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7D5A5A" strokeWidth="1.4">
               <path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z" />
               <circle cx="12" cy="9" r="2.3" />
             </svg>
@@ -199,7 +199,7 @@ export default function WeddingSite() {
         ) : (
           <div style={{ textAlign: 'center' }}>
             <div className="wedding-gallery-empty-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C9A65C" strokeWidth="1.4">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F1D1D1" strokeWidth="1.4">
                 <rect x="3" y="7" width="18" height="13" rx="2" />
                 <path d="M8 7l1.5-2.5h5L16 7" />
                 <circle cx="12" cy="13.5" r="3.2" />

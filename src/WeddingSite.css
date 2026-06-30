@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Cinzel:wght@500;600&family=Trirong:wght@300;400;500;600&display=swap');
 
 .wedding-page {
-  --olive: #4B5842;
-  --olive-dark: #38422F;
-  --gold: #C9A65C;
-  --cream: #FBF6EC;
-  --ivory: #F4ECDB;
-  --ink: #3A3328;
-  --ink-soft: #7A715F;
+  --olive: #7D5A5A;
+  --olive-dark: #7D5A5A;
+  --gold: #F1D1D1;
+  --cream: #FAF2F2;
+  --ivory: #F3E1E1;
+  --ink: #7D5A5A;
+  --ink-soft: #7D5A5A;
 
   max-width: 480px;
   margin: 0 auto;
@@ -186,7 +186,7 @@
 
 .wedding-card {
   background: var(--ivory);
-  border: 1px solid rgba(75, 88, 66, 0.18);
+  border: 1px solid rgba(125, 90, 90, 0.18);
   border-radius: 4px;
   padding: 26px 22px;
 }
@@ -240,7 +240,7 @@
 .wedding-timeline-line {
   width: 1px;
   flex: 1;
-  background: rgba(75, 88, 66, 0.3);
+  background: rgba(125, 90, 90, 0.3);
   margin-top: 4px;
 }
 
@@ -283,7 +283,7 @@
 
 .wedding-map-placeholder {
   background: #fff;
-  border: 1px solid rgba(75, 88, 66, 0.25);
+  border: 1px solid rgba(125, 90, 90, 0.25);
   border-radius: 4px;
   height: 116px;
   display: flex;
@@ -319,7 +319,7 @@
   height: 50px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(201, 166, 92, 0.5);
+  border: 1px solid rgba(241, 209, 209, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -419,7 +419,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 11px 14px;
-  border: 1px solid rgba(75, 88, 66, 0.2);
+  border: 1px solid rgba(125, 90, 90, 0.2);
   border-radius: 4px;
   margin-bottom: 8px;
   font-size: 13px;

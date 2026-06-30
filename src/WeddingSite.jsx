@@ -123,6 +123,7 @@ export default function WeddingSite() {
       <section id="hero" className="wedding-hero">
         <p className="wedding-eyebrow">the wedding of</p>
         <h1 className="wedding-names">ปิ่น &amp; แมมมอธ</h1>
+        <p className="wedding-names-script">Pin &amp; Mammoth</p>
         <div className="wedding-divider" />
         <p className="wedding-date">19 ธันวาคม 2569</p>
         <div className="wedding-countdown">

@@ -193,7 +193,6 @@ export default function WeddingSite() {
       </section>
 
       <section id="gallery" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
-        <div className="wedding-inner">
           <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">gallery</p>
           {GALLERY_IMAGES.length > 0 ? (
             <div className="wedding-gallery-masonry">
@@ -213,7 +212,6 @@ export default function WeddingSite() {
               <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
             </div>
           )}
-        </div>
       </section>
 
       <section ref={rsvpRef} className="wedding-section wedding-reveal">

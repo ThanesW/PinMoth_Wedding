@@ -26,7 +26,7 @@ const NAV_ITEMS = [
   { id: 'table-finder', label: 'ค้นหาโต๊ะ' },
   { id: 'venue', label: 'สถานที่' },
   { id: 'timeline', label: 'กำหนดการ' },
-  { id: 'memory-wall', label: 'Memory Wall' },
+  { id: 'gallery', label: 'Gallery' },
 ]
 
 const TIMELINE = [
@@ -44,6 +44,10 @@ const GALLERY_IMAGES = [
   { src: '/photos/pre-wed-05.jpg', alt: 'ปิ่นกับแมมมอธในชุดกิโมโน ใต้ต้นซากุระที่เกียวโต' },
   { src: '/photos/pre-wed-06.jpg', alt: 'แหวนหมั้นในกล่องสีแดง ใต้ดอกซากุระ' },
   { src: '/photos/pre-wed-07.jpg', alt: 'ปิ่นกับแมมมอธในชุดกิโมโน โชว์แหวนหมั้นใต้ต้นซากุระ' },
+  { src: '/photos/pre-wed-08.jpg', alt: 'ช่อดอกกุหลาบสีชมพูพาสเทล' },
+  { src: '/photos/pre-wed-09.jpg', alt: 'ปิ่นกับแมมมอธกอดกัน ยิ้มหัวเราะริมแม่น้ำ' },
+  { src: '/photos/pre-wed-10.jpg', alt: 'ปิ่นกับแมมมอธนั่งคุยกันริมสะพาน' },
+  { src: '/photos/pre-wed-11.jpg', alt: 'ปิ่นกับแมมมอธถ่ายรูปคู่ริมสะพานพระพุทธยอดฟ้า' },
 ]
 
 const GUEST_TABLES = [
@@ -188,9 +192,9 @@ export default function WeddingSite() {
         </div>
       </section>
 
-      <section id="memory-wall" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
+      <section id="gallery" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
         <div className="wedding-inner">
-          <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">memory wall</p>
+          <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">gallery</p>
           {GALLERY_IMAGES.length > 0 ? (
             <div className="wedding-gallery-masonry">
               {GALLERY_IMAGES.map((img, i) => (

@@ -1,6 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import './WeddingSite.css'
 
+function SlotDigit({ digit }) {
+  return (
+    <span className="slot-digit">
+      <span
+        className="slot-digit-col"
+        style={{ transform: `translateY(-${Number(digit) * 10}%)` }}
+      >
+        {[0,1,2,3,4,5,6,7,8,9].map(n => (
+          <span key={n} className="slot-digit-num">{n}</span>
+        ))}
+      </span>
+    </span>
+  )
+}
+
 const WEDDING_DATE = new Date('2026-12-19T18:00:00+07:00')
 
 const MAP_URL =
@@ -115,7 +130,11 @@ export default function WeddingSite() {
           {countdownUnits.map((unit) => (
             <div className="wedding-countdown-box" key={unit.label}>
               <div className="wedding-countdown-number-wrap">
-                <span className="wedding-countdown-number" key={unit.value}>{unit.value}</span>
+                <span className="wedding-countdown-number">
+                  {String(unit.value).split('').map((d, i) => (
+                    <SlotDigit key={i} digit={d} />
+                  ))}
+                </span>
               </div>
               <span className="wedding-countdown-label">{unit.label}</span>
             </div>

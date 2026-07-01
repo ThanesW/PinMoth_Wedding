@@ -73,10 +73,10 @@ export default function WeddingSite() {
   }, [])
 
   const countdownUnits = [
-    { label: 'Days', value: timeLeft.days },
-    { label: 'Hours', value: timeLeft.hours },
-    { label: 'Min', value: timeLeft.minutes },
-    { label: 'Sec', value: timeLeft.seconds },
+    { label: 'Days', value: String(timeLeft.days) },
+    { label: 'Hours', value: String(timeLeft.hours).padStart(2, '0') },
+    { label: 'Min', value: String(timeLeft.minutes).padStart(2, '0') },
+    { label: 'Sec', value: String(timeLeft.seconds).padStart(2, '0') },
   ]
 
   const trimmedQuery = tableQuery.trim()

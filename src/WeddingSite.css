@@ -107,7 +107,7 @@
   background-image: linear-gradient(rgba(250, 242, 242, 0.80), rgba(250, 242, 242, 0.80)), url('/photos/pre-wed-06.jpg');
   background-size: cover;
   background-position: center center;
-  background-attachment: fixed;
+  background-attachment: scroll;
 }
 
 .wedding-names-script {
@@ -141,7 +141,7 @@
   font-size: 18px;
   letter-spacing: 1px;
   color: var(--ink-soft);
-  margin: 0 0 30px;
+  margin: 24px 0 30px;
 }
 
 .wedding-countdown {

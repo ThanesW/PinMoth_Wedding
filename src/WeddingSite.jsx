@@ -84,7 +84,6 @@ export default function WeddingSite() {
     ? GUEST_TABLES.filter((g) => g.name.toLowerCase().includes(trimmedQuery.toLowerCase()))
     : []
 
-  const introRef = useReveal()
   const midRef = useReveal()
   const galleryRef = useReveal()
   const rsvpRef = useReveal()
@@ -120,12 +119,7 @@ export default function WeddingSite() {
             </div>
           ))}
         </div>
-        <p className="wedding-intro">
-          ขอเชิญทุกท่านร่วมเป็นสักขีพยาน<br />ในวันสำคัญของเรา
-        </p>
       </section>
-
-      <div ref={introRef} className="wedding-reveal" />
 
       <section ref={midRef} className="wedding-section wedding-reveal">
         <div className="wedding-inner wedding-two-col">

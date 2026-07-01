@@ -96,12 +96,18 @@
 /* ---- hero ---- */
 .wedding-hero {
   width: 100%;
+  min-height: 100svh;
   text-align: center;
   padding: 80px 24px 60px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-image: linear-gradient(rgba(250, 242, 242, 0.80), rgba(250, 242, 242, 0.80)), url('/photos/pre-wed-06.jpg');
   background-size: cover;
   background-position: center center;
+  background-attachment: fixed;
 }
 
 .wedding-names-script {
@@ -165,15 +171,6 @@
   color: var(--olive-dark);
   margin-top: 6px;
   text-transform: uppercase;
-}
-
-/* ---- intro (inside hero) ---- */
-.wedding-intro {
-  text-align: center;
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--ink-soft);
-  margin-top: 36px;
 }
 
 /* ---- sections ---- */
@@ -468,7 +465,7 @@
   .wedding-page { --max-w: 1100px; }
 
   /* hero — taller, bigger text */
-  .wedding-hero { padding: 120px 48px 100px; }
+  .wedding-hero { padding: 120px 48px 100px; min-height: 100svh; }
   .wedding-names-script { font-size: 96px; }
   .wedding-eyebrow { font-size: 16px; letter-spacing: 6px; }
   .wedding-date { font-size: 22px; }

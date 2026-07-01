@@ -158,8 +158,6 @@
 }
 
 .wedding-countdown-number-wrap {
-  height: 1.1em;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,17 +170,17 @@
   color: var(--olive-dark);
   line-height: 1;
   display: block;
-  animation: flip-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: num-change 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@keyframes flip-in {
+@keyframes num-change {
   from {
-    transform: translateY(-60%);
     opacity: 0;
+    transform: translateY(-8px) scale(0.92);
   }
   to {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 

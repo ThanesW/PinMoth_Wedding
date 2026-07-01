@@ -99,7 +99,7 @@
   text-align: center;
   padding: 80px 24px 60px;
   position: relative;
-  background-image: linear-gradient(rgba(250, 242, 242, 0.72), rgba(250, 242, 242, 0.78)), url('/photos/pre-wed-06.jpg');
+  background-image: linear-gradient(rgba(250, 242, 242, 0.80), rgba(250, 242, 242, 0.80)), url('/photos/pre-wed-06.jpg');
   background-size: cover;
   background-position: center center;
 }
@@ -167,13 +167,13 @@
   text-transform: uppercase;
 }
 
-/* ---- intro ---- */
+/* ---- intro (inside hero) ---- */
 .wedding-intro {
   text-align: center;
   font-size: 15px;
   line-height: 1.9;
   color: var(--ink-soft);
-  padding: 28px 0 8px;
+  margin-top: 36px;
 }
 
 /* ---- sections ---- */

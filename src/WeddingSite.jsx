@@ -120,15 +120,12 @@ export default function WeddingSite() {
             </div>
           ))}
         </div>
+        <p className="wedding-intro">
+          ขอเชิญทุกท่านร่วมเป็นสักขีพยาน<br />ในวันสำคัญของเรา
+        </p>
       </section>
 
-      <div ref={introRef} className="wedding-reveal">
-        <div className="wedding-inner">
-          <p className="wedding-intro">
-            ขอเชิญทุกท่านร่วมเป็นสักขีพยาน<br />ในวันสำคัญของเรา
-          </p>
-        </div>
-      </div>
+      <div ref={introRef} className="wedding-reveal" />
 
       <section ref={midRef} className="wedding-section wedding-reveal">
         <div className="wedding-inner wedding-two-col">

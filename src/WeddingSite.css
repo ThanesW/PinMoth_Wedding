@@ -154,6 +154,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 64px;
+}
+
+.wedding-countdown-number-wrap {
+  height: 1.1em;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wedding-countdown-number {
@@ -162,6 +171,19 @@
   font-size: 36px;
   color: var(--olive-dark);
   line-height: 1;
+  display: block;
+  animation: flip-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes flip-in {
+  from {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .wedding-countdown-label {
@@ -470,6 +492,7 @@
   .wedding-eyebrow { font-size: 16px; letter-spacing: 6px; }
   .wedding-date { font-size: 22px; }
   .wedding-countdown { gap: 48px; }
+  .wedding-countdown-box { min-width: 100px; }
   .wedding-countdown-number { font-size: 52px; }
   .wedding-countdown-label { font-size: 12px; color: var(--olive-dark); }
 

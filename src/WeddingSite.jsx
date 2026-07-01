@@ -114,7 +114,9 @@ export default function WeddingSite() {
         <div className="wedding-countdown">
           {countdownUnits.map((unit) => (
             <div className="wedding-countdown-box" key={unit.label}>
-              <span className="wedding-countdown-number">{unit.value}</span>
+              <div className="wedding-countdown-number-wrap">
+                <span className="wedding-countdown-number" key={unit.value}>{unit.value}</span>
+              </div>
               <span className="wedding-countdown-label">{unit.label}</span>
             </div>
           ))}

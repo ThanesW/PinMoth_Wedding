@@ -99,9 +99,9 @@
   text-align: center;
   padding: 80px 24px 60px;
   position: relative;
-  background-image: linear-gradient(rgba(250, 242, 242, 0.82), rgba(250, 242, 242, 0.88)), url('/photos/pre-wed-06.jpg');
+  background-image: linear-gradient(rgba(250, 242, 242, 0.72), rgba(250, 242, 242, 0.78)), url('/photos/pre-wed-06.jpg');
   background-size: cover;
-  background-position: center 30%;
+  background-position: center center;
 }
 
 .wedding-names-script {
@@ -162,7 +162,7 @@
   font-family: 'Prompt', sans-serif;
   font-size: 10px;
   letter-spacing: 1.5px;
-  color: var(--gold);
+  color: var(--olive-dark);
   margin-top: 6px;
   text-transform: uppercase;
 }
@@ -474,7 +474,7 @@
   .wedding-date { font-size: 22px; }
   .wedding-countdown { gap: 48px; }
   .wedding-countdown-number { font-size: 52px; }
-  .wedding-countdown-label { font-size: 12px; }
+  .wedding-countdown-label { font-size: 12px; color: var(--olive-dark); }
 
   /* nav */
   .wedding-nav { padding: 18px 48px; }

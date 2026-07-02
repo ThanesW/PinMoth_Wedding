@@ -146,6 +146,28 @@ export default function WeddingSite() {
         </div>
       </section>
 
+      <section id="gallery" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
+          <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">gallery</p>
+          {GALLERY_IMAGES.length > 0 ? (
+            <div className="wedding-gallery-masonry">
+              {GALLERY_IMAGES.map((img, i) => (
+                <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
+              ))}
+            </div>
+          ) : (
+            <div style={{ textAlign: 'center' }}>
+              <div className="wedding-gallery-empty-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F1D1D1" strokeWidth="1.4">
+                  <rect x="3" y="7" width="18" height="13" rx="2" />
+                  <path d="M8 7l1.5-2.5h5L16 7" />
+                  <circle cx="12" cy="13.5" r="3.2" />
+                </svg>
+              </div>
+              <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
+            </div>
+          )}
+      </section>
+
       <section ref={midRef} className="wedding-section wedding-reveal">
         <div className="wedding-inner wedding-two-col">
           <div id="timeline">
@@ -190,28 +212,6 @@ export default function WeddingSite() {
             </div>
           </div>
         </div>
-      </section>
-
-      <section id="gallery" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
-          <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">gallery</p>
-          {GALLERY_IMAGES.length > 0 ? (
-            <div className="wedding-gallery-masonry">
-              {GALLERY_IMAGES.map((img, i) => (
-                <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
-              ))}
-            </div>
-          ) : (
-            <div style={{ textAlign: 'center' }}>
-              <div className="wedding-gallery-empty-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F1D1D1" strokeWidth="1.4">
-                  <rect x="3" y="7" width="18" height="13" rx="2" />
-                  <path d="M8 7l1.5-2.5h5L16 7" />
-                  <circle cx="12" cy="13.5" r="3.2" />
-                </svg>
-              </div>
-              <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
-            </div>
-          )}
       </section>
 
       <section ref={rsvpRef} className="wedding-section wedding-reveal">

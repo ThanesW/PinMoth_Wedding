@@ -30,10 +30,12 @@ const NAV_ITEMS = [
 ]
 
 const TIMELINE = [
-  { time: '16:00', title: 'พิธีหมั้น', desc: 'พิธีสงฆ์และพิธีหมั้นแบบไทย' },
-  { time: '17:00', title: 'ถ่ายภาพ', desc: 'ถ่ายภาพร่วมกับครอบครัวและเพื่อนๆ' },
-  { time: '18:00', title: 'งานเลี้ยงฉลองมงคลสมรส', desc: 'อาหารค่ำและการแสดงความยินดี' },
-  { time: '20:30', title: 'อวยพรคู่บ่าวสาว', desc: 'ช่วงเวลาพิเศษส่งท้ายงาน' },
+  { time: '18:00', title: 'Guest Arrival', desc: 'แขกเริ่มเดินทางมาถึงงาน', icon: '/icons/tl-01.png' },
+  { time: '18:30', title: 'Couple Entrance', desc: 'เจ้าบ่าวเจ้าสาวเดินเข้างาน', icon: '/icons/tl-02.png' },
+  { time: '19:00', title: 'I Do', desc: 'พิธีแลกแหวนและปฏิญาณตน', icon: '/icons/tl-03.png' },
+  { time: '19:30', title: 'Dinner', desc: 'รับประทานอาหารค่ำร่วมกัน', icon: '/icons/tl-04.png' },
+  { time: '20:00', title: 'Cake Cutting', desc: 'ตัดเค้กมงคลสมรส', icon: '/icons/tl-05.png' },
+  { time: '21:00', title: 'Bouquet Toss', desc: 'โยนช่อดอกไม้ส่งท้ายงาน', icon: '/icons/tl-06.png' },
 ]
 
 const GALLERY_IMAGES = [
@@ -104,6 +106,7 @@ export default function WeddingSite() {
     : []
 
   const midRef = useReveal()
+  const venueRef = useReveal()
   const galleryRef = useReveal()
   const rsvpRef = useReveal()
   const tableRef = useReveal()
@@ -146,70 +149,46 @@ export default function WeddingSite() {
         </div>
       </section>
 
-      <section id="gallery" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
-          <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">gallery</p>
-          {GALLERY_IMAGES.length > 0 ? (
-            <div className="wedding-gallery-masonry">
-              {GALLERY_IMAGES.map((img, i) => (
-                <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
-              ))}
-            </div>
-          ) : (
-            <div style={{ textAlign: 'center' }}>
-              <div className="wedding-gallery-empty-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F1D1D1" strokeWidth="1.4">
-                  <rect x="3" y="7" width="18" height="13" rx="2" />
-                  <path d="M8 7l1.5-2.5h5L16 7" />
-                  <circle cx="12" cy="13.5" r="3.2" />
-                </svg>
+      <section id="timeline" ref={midRef} className="wedding-section wedding-reveal">
+        <div className="wedding-inner">
+          <p className="wedding-eyebrow wedding-eyebrow--center">timeline</p>
+          <div className="wedding-timeline-icon-list">
+            {TIMELINE.map((item, i) => (
+              <div className="wedding-tl-row" key={item.title}>
+                <div className="wedding-tl-icon-wrap">
+                  <img src={item.icon} alt={item.title} className="wedding-tl-icon" />
+                </div>
+                <div className="wedding-tl-dash">—</div>
+                <div className="wedding-tl-info">
+                  <p className="wedding-tl-time">{item.time}</p>
+                  <p className="wedding-tl-title">{item.title}</p>
+                </div>
+                {i < TIMELINE.length - 1 && <div className="wedding-tl-sep" />}
               </div>
-              <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
-            </div>
-          )}
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section ref={midRef} className="wedding-section wedding-reveal">
-        <div className="wedding-inner wedding-two-col">
-          <div id="timeline">
-            <p className="wedding-eyebrow">timeline</p>
-            <div className="wedding-card">
-              <div className="wedding-timeline">
-                {TIMELINE.map((item, i) => (
-                  <div className="wedding-timeline-item" key={item.title}>
-                    <div className="wedding-timeline-time">{item.time}</div>
-                    <div className="wedding-timeline-marker-col">
-                      <span className="wedding-timeline-dot" />
-                      {i !== TIMELINE.length - 1 && <span className="wedding-timeline-line" />}
-                    </div>
-                    <div className="wedding-timeline-content">
-                      <h3 className="wedding-timeline-title">{item.title}</h3>
-                      <p className="wedding-timeline-desc">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+      <section id="venue" ref={venueRef} className="wedding-section wedding-reveal">
+        <div className="wedding-inner">
+          <p className="wedding-eyebrow wedding-eyebrow--center">venue</p>
+          <div className="wedding-card wedding-card--center" style={{ maxWidth: 600, margin: '0 auto' }}>
+            <h2 className="wedding-venue-name">The Athenee Hotel</h2>
+            <p className="wedding-venue-sub">a Luxury Collection Hotel, Bangkok</p>
+            <div className="wedding-map-embed">
+              <iframe
+                title="แผนที่ The Athenee Hotel"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.621443029729!2d100.54520007509002!3d13.741354086649425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2974d07377631%3A0xfd90058d241e8d30!2sThe%20Athenee%20Hotel%2C%20a%20Luxury%20Collection%20Hotel%2C%20Bangkok!5e0!3m2!1sen!2sth!4v1782820744309!5m2!1sen!2sth"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
-          </div>
-
-          <div id="venue">
-            <p className="wedding-eyebrow">venue</p>
-            <div className="wedding-card wedding-card--center">
-              <h2 className="wedding-venue-name">The Athenee Hotel</h2>
-              <p className="wedding-venue-sub">a Luxury Collection Hotel, Bangkok</p>
-              <div className="wedding-map-embed">
-                <iframe
-                  title="แผนที่ The Athenee Hotel"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.621443029729!2d100.54520007509002!3d13.741354086649425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2974d07377631%3A0xfd90058d241e8d30!2sThe%20Athenee%20Hotel%2C%20a%20Luxury%20Collection%20Hotel%2C%20Bangkok!5e0!3m2!1sen!2sth!4v1782820744309!5m2!1sen!2sth"
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
-              </div>
-              <p className="wedding-venue-time">งานเลี้ยง · 18:00 น. เป็นต้นไป</p>
-              <a className="wedding-btn wedding-btn--fill" href={MAP_URL} target="_blank" rel="noopener noreferrer">
-                ดูแผนที่
-              </a>
-            </div>
+            <p className="wedding-venue-time">งานเลี้ยง · 18:00 น. เป็นต้นไป</p>
+            <a className="wedding-btn wedding-btn--fill" href={MAP_URL} target="_blank" rel="noopener noreferrer">
+              ดูแผนที่
+            </a>
           </div>
         </div>
       </section>
@@ -265,6 +244,28 @@ export default function WeddingSite() {
             )}
           </div>
         </div>
+      </section>
+
+      <section id="gallery" ref={galleryRef} className="wedding-section wedding-section--olive wedding-reveal">
+        <p className="wedding-eyebrow wedding-eyebrow--center wedding-eyebrow--light">gallery</p>
+        {GALLERY_IMAGES.length > 0 ? (
+          <div className="wedding-gallery-masonry">
+            {GALLERY_IMAGES.map((img, i) => (
+              <img key={i} src={img.src} alt={img.alt} className="wedding-gallery-photo" />
+            ))}
+          </div>
+        ) : (
+          <div style={{ textAlign: 'center' }}>
+            <div className="wedding-gallery-empty-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F1D1D1" strokeWidth="1.4">
+                <rect x="3" y="7" width="18" height="13" rx="2" />
+                <path d="M8 7l1.5-2.5h5L16 7" />
+                <circle cx="12" cy="13.5" r="3.2" />
+              </svg>
+            </div>
+            <p className="wedding-gallery-empty-text">ภาพความทรงจำจะอัปเดตเร็วๆ นี้</p>
+          </div>
+        )}
       </section>
 
       <footer className="wedding-footer">
